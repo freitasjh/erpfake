@@ -34,6 +34,6 @@ springdoc:
         name: API Gateway Service
       - url: /client/v3/api-docs
         name: Cliente Service
-      - url: /price-service/v3/api-docs
-        name: Price Service
+      - url: /product/v3/api-docs
+        name: Producto servico
         
