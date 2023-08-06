@@ -45,6 +45,7 @@ public class ProductConverter {
 		productInput.setCodEan(product.getCodeEan());
 		productInput.setDescription(product.getDescription());
 		productInput.setPrice(product.getPrice());
+		productInput.setQuantity(product.getQuantity());
 		
 		return productInput;
 	}

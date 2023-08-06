@@ -15,6 +15,7 @@ public class ProductInputDTO implements Serializable {
 	private String codEan;
 	private String description;
 	private double price;
+	private Double quantity;
 
 	public Long getId() {
 		return id;
@@ -56,10 +57,18 @@ public class ProductInputDTO implements Serializable {
 		this.price = price;
 	}
 
+	public void setQuantity(Double quantity) {
+		this.quantity = quantity;
+	}
+
+	public Double getQuantity() {
+		return quantity;
+	}
+
 	@Override
 	public String toString() {
 		return "ProductInputDTO [id=" + id + ", code=" + code + ", codEan=" + codEan + ", description=" + description
-				+ ", price=" + price + "]";
+				+ ", price=" + price + ", quantity=" + quantity + "]";
 	}
 
 }

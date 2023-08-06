@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.systec.erpfake.product.client.StockClient;
 import br.com.systec.erpfake.product.model.Product;
 import br.com.systec.erpfake.product.repository.ProductRepository;
 
@@ -19,6 +20,9 @@ public class ProductService {
 
 	@Autowired
 	private ProductRepository repository;
+	
+	@Autowired
+	private StockClient stockClient;
 	
 	@Transactional
 	public Product save(Product product) {
@@ -42,5 +46,14 @@ public class ProductService {
 		List<Product> listOfProduct = repository.findAll();
 		
 		return listOfProduct;
+	}
+	
+	public Product findById(Long productId) {
+		Product product = repository.findById(productId).orElseThrow(() -> new RuntimeException("Produto não encontrado"));
+		
+		product.setQuantity(stockClient.getProductQuantity(productId));
+		
+		return product;
+		
 	}
 }

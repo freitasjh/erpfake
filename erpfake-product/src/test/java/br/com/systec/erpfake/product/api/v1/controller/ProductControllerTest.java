@@ -77,7 +77,7 @@ public class ProductControllerTest extends AbstractIT{
 	
 	@Test
 	@Order(3)
-	void findAllClients() throws Exception {
+	void findAllProducts() throws Exception {
 		
 		MvcResult result = mockMvc.perform(MockMvcRequestBuilders
                 .get(ENDPOINT)

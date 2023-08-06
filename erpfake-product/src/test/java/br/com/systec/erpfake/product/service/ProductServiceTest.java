@@ -1,9 +1,13 @@
 package br.com.systec.erpfake.product.service;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mockitoSession;
+import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -14,6 +18,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import br.com.systec.erpfake.product.ProductFake;
+import br.com.systec.erpfake.product.client.StockClient;
 import br.com.systec.erpfake.product.model.Product;
 import br.com.systec.erpfake.product.repository.ProductRepository;
 
@@ -27,6 +32,9 @@ public class ProductServiceTest {
 	
 	@Mock
 	private ProductRepository repository;
+	
+	@Mock
+	private StockClient stocClient;
 	
 	@InjectMocks
 	private ProductService service;
@@ -85,4 +93,21 @@ public class ProductServiceTest {
 		
 		Mockito.verify(repository).findAll();		
 	}
+	
+	@Test
+	void findProductById() {
+		Double productQuantity = 10.0;
+		Optional<Product> product = Optional.of(ProductFake.fakeEntity());
+		
+		doReturn(productQuantity).when(stocClient).getProductQuantity(Mockito.anyLong());
+		when(repository.findById(Mockito.anyLong())).thenReturn(product);
+	
+		Product productReturn = service.findById(Mockito.anyLong());
+		
+		Assertions.assertThat(productReturn.getQuantity()).isEqualTo(productQuantity);
+		Assertions.assertThat(productReturn.getId()).isEqualTo(product.get().getId());
+		
+		Mockito.verify(repository).findById(Mockito.anyLong());
+		Mockito.verify(stocClient).getProductQuantity(Mockito.anyLong());
+	}	
 }

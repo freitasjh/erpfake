@@ -26,6 +26,10 @@ public class StockService {
 	public Double getQuantityStockProduct(Long productId) {
 		Double stockQuantity = repository.stockQuantityProduct(productId);
 		
+		if(stockQuantity == null) {
+			stockQuantity = 0.0;
+		}
+		
 		return stockQuantity;
 	}
 }
