@@ -48,6 +48,7 @@
 	</dependencyManagement>
 
 	<build>
+		<finalName>erpfake-eureka</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
