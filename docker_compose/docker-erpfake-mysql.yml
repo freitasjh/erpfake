@@ -1,0 +1,19 @@
+version: '3.1'
+
+services:
+  mysql:
+    image: mysql:8.0.28
+    container_name: mysql01
+    ports:
+      - '3306:3306'
+    volumes:
+      - /opt/mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: agendamento
+    networks:
+      - erpfake
+networks:
+  erpfake:
+    external:
+      name: erpfake-network

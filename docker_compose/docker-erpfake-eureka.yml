@@ -1,0 +1,16 @@
+version: '3.1'
+
+services: 
+  erpfake-eureka:
+    image: erpfake/eureka:1.0.0
+    container_name: erpfake-eureka
+    environment:
+      EUREKA_HOST: "erpfake-eureka"
+    ports: 
+      - 8081:8081
+    networks:
+      - erpfake
+networks:
+  erpfake:
+    external:
+      name: erpfake-network

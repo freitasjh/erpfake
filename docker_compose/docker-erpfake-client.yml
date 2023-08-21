@@ -1,0 +1,14 @@
+version: '3.1'
+
+services: 
+  erpfake-client:
+    image: erpfake/client:1.0.0
+    environment:
+      MYSQL_HOST: "mysql01"
+      EUREKA_HOST: "erpfake-eureka"
+    networks:
+      - erpfake
+networks:
+  erpfake:
+    external:
+      name: erpfake-network

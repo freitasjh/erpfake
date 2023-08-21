@@ -18,7 +18,7 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
     service-url:
-      defaultZone: http://localhost:8081/eureka
+      defaultZone: http://${EUREKA_HOST:localhost}:8081/eureka
 springdoc:
   enable-native-support: true
   api-docs:
