@@ -29,4 +29,16 @@ public class PurchaseItemConverter {
 		
 		return purchaseItem;
 	}
+	
+	public PurchaseItemDTO toDTO(PurchaseItem purchaseItem) {
+		PurchaseItemDTO itemDTO = new PurchaseItemDTO();
+		itemDTO.setId(purchaseItem.getId());
+		itemDTO.setProductId(purchaseItem.getProductId());
+		itemDTO.setProductDescription(purchaseItem.getProductDescription());
+		itemDTO.setQuantity(purchaseItem.getQuantity());
+		itemDTO.setAmount(purchaseItem.getAmount());
+		itemDTO.setUnitaryValue(purchaseItem.getUnitaryValue());
+		
+		return itemDTO;
+	}
 }

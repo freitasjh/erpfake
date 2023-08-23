@@ -27,4 +27,18 @@ public class PurchaseItemConverterTest {
 		Assertions.assertThat(itemDTO.getQuantity()).isEqualTo(purchaseItem.getQuantity());
 		Assertions.assertThat(itemDTO.getUnitaryValue()).isEqualTo(purchaseItem.getUnitaryValue());		
 	}
+	
+	@Test
+	void convertPurchaseItemToPurchaseItemDTO() {
+		PurchaseItem purchaseItem = PurchaseItemFake.toFakeItem();
+		
+		PurchaseItemDTO itemDTO = PurchaseItemConverter.getInstance().toDTO(purchaseItem);
+		
+		Assertions.assertThat(itemDTO.getId()).isEqualTo(purchaseItem.getId());
+		Assertions.assertThat(itemDTO.getProductId()).isEqualTo(purchaseItem.getProductId());
+		Assertions.assertThat(itemDTO.getProductDescription()).isEqualTo(purchaseItem.getProductDescription());
+		Assertions.assertThat(itemDTO.getAmount()).isEqualTo(purchaseItem.getAmount());
+		Assertions.assertThat(itemDTO.getQuantity()).isEqualTo(purchaseItem.getQuantity());
+		Assertions.assertThat(itemDTO.getUnitaryValue()).isEqualTo(purchaseItem.getUnitaryValue());		
+	}
 }

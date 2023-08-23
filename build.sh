@@ -69,6 +69,21 @@ buildGateway() {
     fi
 }
 
+buildPurchase() {
+    echo "Buildando o erpfake compra";
+    cd erpfake-purchase && mvn clean install
+    
+    echo "Criando a imagem do servico de compra"
+    docker build -t $DOCKER_NAME/purchase:$DOCKER_VERSION . && cd ..
+
+
+    if [[ "$?" -eq "1" ]]
+    then
+        echo "Ocorreu um erro ao tentar gerar a build do erp purchase";
+        exit 1;
+    fi
+}
+
 buildFrontend() {
     echo "Ainda não implementado.... aguardando a vontade =)"   
 }
@@ -96,5 +111,8 @@ case $1 in
     ;;
     build-gateway)
         buildGateway;
+    ;;
+    build-purchase)
+        buildPurchase;
     ;;
 esac
