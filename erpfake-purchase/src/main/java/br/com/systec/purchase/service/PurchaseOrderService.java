@@ -8,7 +8,7 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.systec.purchase.amqp.StockAMQPConfiguration;
+import br.com.systec.purchase.amqp.PurchaseAMQPConfiguration;
 import br.com.systec.purchase.amqp.dto.StockPurchaseDTO;
 import br.com.systec.purchase.amqp.dto.StockPurchaseItemDTO;
 import br.com.systec.purchase.enums.OrderStatus;
@@ -82,6 +82,6 @@ public class PurchaseOrderService {
 		}
 		
 		
-		rabbitTemplate.convertAndSend(StockAMQPConfiguration.STOCK_PUSH_QUEUE, stockPurchaseDTO);
+		rabbitTemplate.convertAndSend(PurchaseAMQPConfiguration.STOCK_PUSH_FANOUT, stockPurchaseDTO);
 	}
 }

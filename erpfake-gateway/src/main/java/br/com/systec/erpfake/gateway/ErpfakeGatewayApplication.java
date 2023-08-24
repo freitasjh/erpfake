@@ -33,6 +33,8 @@ public class ErpfakeGatewayApplication {
 				.route(r -> r.path("/api/v1/products").and().method(HttpMethod.GET).uri("lb://product"))
 				.route(r -> r.path("/api/v1/products").and().method(HttpMethod.POST).uri("lb://product"))
 				.route(r -> r.path("/api/v1/stocks/productQuantity").and().method(HttpMethod.GET).uri("lb://stock"))
+				.route(r -> r.path("/purchase/v3/api-docs").and().method(HttpMethod.GET).uri("lb://purchase"))
+				.route(r -> r.path("/api/v1/purchase/**").and().method(HttpMethod.GET, HttpMethod.PATCH, HttpMethod.POST).uri("lb://purchase"))
 				.build();
 	}
 

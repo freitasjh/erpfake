@@ -1,11 +1,12 @@
 version: '3.6'
 
 services: 
-  erpfake-product:
-    image: erpfake/product:1.0.0
+  erpfake-purhcase:
+    image: erpfake/purchase:1.0.0
     environment:
       MYSQL_HOST: "mysql01"
       EUREKA_HOST: "erpfake-eureka"
+      RABBITMQ_HOST: "rabbitmq"
     networks:
       - erpfake
 networks:

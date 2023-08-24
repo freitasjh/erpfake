@@ -1,7 +1,6 @@
 package br.com.systec.purchase.amqp;
 
-import org.springframework.amqp.core.Queue;
-import org.springframework.amqp.core.QueueBuilder;
+import org.springframework.amqp.core.FanoutExchange;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -12,14 +11,15 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class StockAMQPConfiguration {
+public class PurchaseAMQPConfiguration {
 
 	public static final String STOCK_PUSH_QUEUE = "stock.purchase";
+	public static final String STOCK_PUSH_FANOUT = "stock.purchase.ex";
 
-	@Bean
-	Queue stockQueue() {
-		return QueueBuilder.nonDurable(STOCK_PUSH_QUEUE).build();
-	}
+//	@Bean
+//	Queue stockQueue() {
+//		return QueueBuilder.nonDurable(STOCK_PUSH_QUEUE).build();
+//	}
 
 	@Bean
 	RabbitAdmin createRabbitAdmin(ConnectionFactory conection) {
@@ -34,6 +34,11 @@ public class StockAMQPConfiguration {
 	@Bean
 	Jackson2JsonMessageConverter messageConverter() {
 		return new Jackson2JsonMessageConverter();
+	}
+	
+	@Bean
+	FanoutExchange createFanoutExchange() {
+		return new FanoutExchange(STOCK_PUSH_FANOUT);
 	}
 
 	@Bean

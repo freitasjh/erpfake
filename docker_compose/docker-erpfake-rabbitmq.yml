@@ -10,4 +10,10 @@ services:
       - 15672:15672
     volumes:
       - /opt/rabbitmq/dados:/var/lib/rabbitmq/
+    networks:
+      - erpfake
+networks:
+  erpfake:
+    external:
+      name: erpfake-network
     

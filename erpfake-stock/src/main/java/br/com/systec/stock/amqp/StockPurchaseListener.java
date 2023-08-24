@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 
 import br.com.systec.stock.amqp.dto.StockPurchaseDTO;
@@ -17,7 +18,7 @@ public class StockPurchaseListener {
 	private StockService stockService;
 
 	@RabbitListener(queues = "stock.purchase")
-	public void receivePurchaseStock(StockPurchaseDTO stockPurchaseDTO) {
+	public void receivePurchaseStock(@Payload StockPurchaseDTO stockPurchaseDTO) {
 		LOG.info("Recenendo o Pedido de compra dos produtos");
 
 		stockService.stockPurchaseSave(stockPurchaseDTO);

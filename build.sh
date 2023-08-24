@@ -95,6 +95,7 @@ case $1 in
         buildEureka;
         buildStock;
         buildGateway;
+        buildPurchase;
     ;;
     build-client)
         buildClient;

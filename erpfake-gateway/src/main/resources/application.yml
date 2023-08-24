@@ -34,4 +34,6 @@ springdoc:
         name: Cliente Service
       - url: /product/v3/api-docs
         name: Produto servico
+      - url: /purchase/v3/api-docs
+        name: Compra servico
         
