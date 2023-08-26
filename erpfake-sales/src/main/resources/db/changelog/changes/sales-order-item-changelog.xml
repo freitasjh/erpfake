@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+						http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.3.xsd">
+
+	<changeSet id="sales-order-item-300720223J-1" author="Joao">
+		<createTable tableName="sales_order_item">
+			<column autoIncrement="true" name="id" type="BIGINT">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="product_id" type="int8">
+				<constraints nullable="true"/>
+			</column>
+			<column name="product_description" type="varchar(255)" />
+			<column name="unit_value" type="float" />
+			<column name="amount" type="float" />
+			<column name="quantity" type="float" />
+			<column name="sub_total" type="float" />
+			<column name="discount_value" type="float" />
+			<column name="discount_percent" type="float" />
+			<column name="sales_order_id" type="int8" />
+		</createTable>
+		<addForeignKeyConstraint baseTableName="sales_order_item" 
+								 baseColumnNames="sales_order_id" 
+								 constraintName="fk_sales_order_id_sales_order_item" 
+								 referencedTableName="sales_order" 
+								 referencedColumnNames="id" />
+	</changeSet>
+</databaseChangeLog>
