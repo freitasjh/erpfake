@@ -8,6 +8,7 @@ public class ProductDTO implements Serializable {
 	private Long id;
 	private String description;
 	private double price;
+	private double quantity;
 
 	public Long getId() {
 		return id;
@@ -33,9 +34,18 @@ public class ProductDTO implements Serializable {
 		this.price = price;
 	}
 
+	public double getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(double quantity) {
+		this.quantity = quantity;
+	}
+
 	@Override
 	public String toString() {
-		return "ProductDTO [id=" + id + ", description=" + description + ", price=" + price + "]";
+		return "ProductDTO [id=" + id + ", description=" + description + ", price=" + price + ", quantity=" + quantity
+				+ "]";
 	}
 
 }

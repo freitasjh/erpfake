@@ -45,6 +45,10 @@ public class ProductService {
 	public List<Product> findAll() {
 		List<Product> listOfProduct = repository.findAll();
 		
+		for(Product item : listOfProduct) {
+			item.setQuantity(stockClient.getProductQuantity(item.getId()));
+		}
+		
 		return listOfProduct;
 	}
 	

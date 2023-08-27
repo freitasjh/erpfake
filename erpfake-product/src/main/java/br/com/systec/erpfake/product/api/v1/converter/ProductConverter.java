@@ -55,6 +55,7 @@ public class ProductConverter {
 		productDTO.setId(product.getId());
 		productDTO.setDescription(product.getDescription());
 		productDTO.setPrice(product.getPrice());
+		productDTO.setQuantity(product.getQuantity());
 		
 		return productDTO;
 	}

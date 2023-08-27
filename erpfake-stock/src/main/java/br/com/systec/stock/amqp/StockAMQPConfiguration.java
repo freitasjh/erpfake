@@ -15,10 +15,10 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class StockAMQPConfiguration {
 
-	public static final String STOCK_PUSH_QUEUE = "stock.purchase";
-	public static final String STOCK_PUSH_QUEUE_DLQ = "stock.purchase.dlq";
-	public static final String STOCK_PUSH_FANOUT = "stock.purchase.ex";
-	public static final String STOCK_PUSH_FANOUT_dlx = "stock.purchase.dlx";
+	public static final String STOCK_PUSH_QUEUE = "stock.queue";
+	public static final String STOCK_PUSH_QUEUE_DLQ = "stock.dlq";
+	public static final String STOCK_PUSH_FANOUT = "stock.ex";
+	public static final String STOCK_PUSH_FANOUT_dlx = "stock.dlx";
 
 	@Bean
 	Jackson2JsonMessageConverter messageConverter() {

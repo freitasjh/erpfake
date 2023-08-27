@@ -1,6 +1,6 @@
-package br.com.systec.purchase.amqp.dto;
+package br.com.systec.stock.amqp.dto;
 
-public class StockPurchaseItemDTO {
+public class StockOrderItemDTO {
 
 	private Long productId;
 	private double quantity;

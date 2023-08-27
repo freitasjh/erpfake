@@ -15,6 +15,9 @@ public class SalesOrderService {
 	
 	@Autowired
 	private SalesOrderRepository repository;
+	
+	@Autowired
+	private SalesStockService salesStockService;
 
 	@Transactional
 	public SalesOrder save(SalesOrder salesOrder) {
@@ -33,7 +36,7 @@ public class SalesOrderService {
 		SalesOrder salesOrderSaved = repository.save(salesOrder);
 		
 		if(salesOrderSaved.getSalesOrderStatus() == SalesOrderStatus.FINALIZE) {
-			//FAZ A LOGICA PARA MANDAR PARA A BAIXA DE ESTOQUE
+			salesStockService.sendSalesStock(salesOrderSaved);
 		}
 		
 		return salesOrderSaved;
@@ -47,7 +50,7 @@ public class SalesOrderService {
 		
 		SalesOrder salesOrderSaved = repository.save(salesOrder);
 		
-		//LOGICA PARA MANDAR PARA A BAIXA DE ESTOQUE
+		salesStockService.sendSalesStock(salesOrderSaved);
 		
 		return salesOrderSaved;
 	}
@@ -60,7 +63,8 @@ public class SalesOrderService {
 	}
 	
 	public SalesOrder findById(Long salesOrderId) {
-		SalesOrder salesOrder = repository.findById(salesOrderId).orElseThrow(() -> new RuntimeException("Pedido de venda não encontrado"));
+		SalesOrder salesOrder = repository.findById(salesOrderId)
+				.orElseThrow(() -> new RuntimeException("Pedido de venda não encontrado"));
 		
 		
 		return salesOrder;

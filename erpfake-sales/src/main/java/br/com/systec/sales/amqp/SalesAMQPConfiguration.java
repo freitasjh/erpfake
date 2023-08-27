@@ -1,5 +1,6 @@
-package br.com.systec.purchase.amqp;
+package br.com.systec.sales.amqp;
 
+import org.springframework.amqp.core.DirectExchange;
 import org.springframework.amqp.core.FanoutExchange;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
@@ -11,16 +12,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class PurchaseAMQPConfiguration {
-
-//	public static final String STOCK_PUSH_QUEUE = "stock.purchase";
-	public static final String STOCK_EXANGE = "stock.ex";
-
-//	@Bean
-//	Queue stockQueue() {
-//		return QueueBuilder.nonDurable(STOCK_PUSH_QUEUE).build();
-//	}
-
+public class SalesAMQPConfiguration {
+	public static final String STOCK_EX = "stock.ex";
+	
 	@Bean
 	RabbitAdmin createRabbitAdmin(ConnectionFactory conection) {
 		return new RabbitAdmin(conection);
@@ -37,15 +31,14 @@ public class PurchaseAMQPConfiguration {
 	}
 	
 	@Bean
-	FanoutExchange createFanoutExchange() {
-		return new FanoutExchange(STOCK_EXANGE);
-	}
-
-	@Bean
 	RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory, Jackson2JsonMessageConverter messageConverter) {
 		RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
 		rabbitTemplate.setMessageConverter(messageConverter);
 
 		return rabbitTemplate;
+	}
+	
+	FanoutExchange createDirectExceange() {
+		return new FanoutExchange(STOCK_EX);
 	}
 }

@@ -22,6 +22,7 @@ public class ProductConverterTest {
 		Assertions.assertThat(product.getId()).isEqualTo(productDTO.getId());
 		Assertions.assertThat(product.getDescription()).isEqualTo(productDTO.getDescription());
 		Assertions.assertThat(product.getPrice()).isEqualTo(productDTO.getPrice());
+		Assertions.assertThat(product.getQuantity()).isEqualTo(productDTO.getQuantity());
 	}
 	
 	@Test

@@ -5,8 +5,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.systec.stock.amqp.dto.StockPurchaseDTO;
-import br.com.systec.stock.amqp.dto.StockPurchaseItemDTO;
+import br.com.systec.stock.amqp.dto.StockOrderDTO;
+import br.com.systec.stock.amqp.dto.StockOrderItemDTO;
 import br.com.systec.stock.enums.TransactionType;
 import br.com.systec.stock.model.Stock;
 import br.com.systec.stock.repository.StockRepository;
@@ -30,14 +30,14 @@ public class StockService {
 	}
 	
 	@Transactional
-	public void stockPurchaseSave(StockPurchaseDTO stockPurchaseDTO) {
+	public void stockSave(StockOrderDTO stockOrderDTO) {
 		LOG.info("Salvando as quantidades dos produtos no stock");
-		for(StockPurchaseItemDTO item : stockPurchaseDTO.getListOfStockPurchaseItem()) {
+		for(StockOrderItemDTO item : stockOrderDTO.getListOfSalesOrderItem()) {
 			Stock stock = new Stock();
 			stock.setProductId(item.getProductId());
 			stock.setQuantity(item.getQuantity());
-			stock.setTransactionType(TransactionType.INPUT);
-			stock.setDateTransaction(stockPurchaseDTO.getDatePurchaseFinalized());
+			stock.setTransactionType(TransactionType.valueOf(stockOrderDTO.getTransactionType()));
+			stock.setDateTransaction(stockOrderDTO.getDateOrderFinalize());
 			
 			save(stock);
 		}

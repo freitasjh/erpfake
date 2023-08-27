@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.systec.purchase.amqp.PurchaseAMQPConfiguration;
-import br.com.systec.purchase.amqp.dto.StockPurchaseDTO;
-import br.com.systec.purchase.amqp.dto.StockPurchaseItemDTO;
+import br.com.systec.purchase.amqp.dto.StockOrderDTO;
+import br.com.systec.purchase.amqp.dto.StockOrderItemDTO;
 import br.com.systec.purchase.enums.OrderStatus;
 import br.com.systec.purchase.model.PurchaseItem;
 import br.com.systec.purchase.model.PurchaseOrder;
@@ -70,18 +70,18 @@ public class PurchaseOrderService {
 	}
 	
 	private void sendStockPurchase(PurchaseOrder purchaseOrder) {
-		StockPurchaseDTO stockPurchaseDTO = new StockPurchaseDTO();
-		stockPurchaseDTO.setPurchaeOrderId(purchaseOrder.getId());
-		stockPurchaseDTO.setDatePurchaseFinalized(new Date());
+		StockOrderDTO stockPurchaseDTO = new StockOrderDTO();
+		stockPurchaseDTO.setOrderId(purchaseOrder.getId());
+		stockPurchaseDTO.setDateOrderFinalize(new Date());
 		
 		for(PurchaseItem item : purchaseOrder.getListOfPurchaseItem()) {
-			StockPurchaseItemDTO itemDTO = new StockPurchaseItemDTO();
+			StockOrderItemDTO itemDTO = new StockOrderItemDTO();
 			itemDTO.setProductId(item.getProductId());
 			itemDTO.setQuantity(item.getQuantity());
-			stockPurchaseDTO.getListOfStockPurchaseItem().add(itemDTO);
+			stockPurchaseDTO.getListOfSalesOrderItem().add(itemDTO);
 		}
 		
 		
-		rabbitTemplate.convertAndSend(PurchaseAMQPConfiguration.STOCK_PUSH_FANOUT, stockPurchaseDTO);
+		rabbitTemplate.convertAndSend(PurchaseAMQPConfiguration.STOCK_EXANGE, stockPurchaseDTO);
 	}
 }

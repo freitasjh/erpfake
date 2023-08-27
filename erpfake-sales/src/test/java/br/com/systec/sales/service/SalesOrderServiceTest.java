@@ -1,5 +1,6 @@
 package br.com.systec.sales.service;
 
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -27,6 +28,9 @@ public class SalesOrderServiceTest {
 	@Mock
 	private SalesOrderRepository repository;
 	
+	@Mock
+	private SalesStockService salesStockService;
+	
 	@InjectMocks
 	private SalesOrderService service;
 	
@@ -40,6 +44,7 @@ public class SalesOrderServiceTest {
 		SalesOrder salesOrderReturn = SalesOrderFake.toFake();
 		
 		doReturn(salesOrderReturn).when(repository).save(salesOrder);
+		doNothing().when(salesStockService).sendSalesStock(salesOrder);
 		
 		SalesOrder salesOrderSaved = service.save(salesOrder);
 		
@@ -47,6 +52,7 @@ public class SalesOrderServiceTest {
 		Assertions.assertThat(salesOrderSaved.getSalesOrderStatus()).isEqualTo(salesOrderReturn.getSalesOrderStatus());
 		
 		verify(repository).save(salesOrder);
+		verify(salesStockService).sendSalesStock(salesOrderSaved);
 	}
 	
 	@Test

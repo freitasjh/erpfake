@@ -11,6 +11,7 @@ public class ProductFake {
 		product.setCode("1");
 		product.setDescription("Produto teste");
 		product.setPrice(10.00);
+		product.setQuantity(50);
 		
 		return product;		
 	}
