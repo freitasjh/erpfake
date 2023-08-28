@@ -70,6 +70,7 @@ const findProduct = async () => {
         <DataTable :value="listOfProduct" showGridlines tableStyle="min-width: 50rem">
           <Column field="description" header="Descrição"></Column>
           <Column field="price" header="Valor"></Column>
+          <Column field="quantity" header="Quantidade"></Column>
         </DataTable>
       </template>
     </Card>
